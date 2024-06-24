@@ -9,9 +9,9 @@ import UIKit
 
 class CounterViewController: UIViewController {
 
-    @IBOutlet weak var CountLabel: UILabel!
-    @IBOutlet weak var DecrementButton: UIButton!
-    @IBOutlet weak var IncrementButton: UIButton!
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var decrementButton: UIButton!
+    @IBOutlet weak var incrementButton: UIButton!
 
     static func make() -> CounterViewController {
         let storyboard = UIStoryboard(name: "Counter", bundle: nil)

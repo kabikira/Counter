@@ -8,6 +8,24 @@
 import XCTest
 @testable import Counter
 
+class CounterViewControllerTests: XCTestCase {
+
+    func testIncrementButton() {
+        // 1テスト対象のViewControllerを表示させる
+        let vc = CounterViewController.make()
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+
+        // 2初期のカウントは「0」であること
+        XCTAssertEqual(vc.countLabel.text, "0")
+
+        // 3「+」ボタンをタップするとカウントが「1」に変化すること
+        vc.incrementButton.sendActions(for: .touchUpInside)
+        XCTAssertEqual(vc.countLabel.text, "1")
+    }
+}
+
 final class CounterTests: XCTestCase {
 
     override func setUpWithError() throws {
