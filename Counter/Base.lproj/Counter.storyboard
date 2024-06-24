@@ -36,6 +36,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="＋"/>
+                                <connections>
+                                    <action selector="tapIncrementButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1ae-vy-xQG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -50,9 +53,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="CountLabel" destination="FIo-m0-TwV" id="o70-o4-2fo"/>
-                        <outlet property="DecrementButton" destination="JSS-31-fsp" id="ipe-dA-Vne"/>
-                        <outlet property="IncrementButton" destination="CWm-tL-cuW" id="fOZ-ra-NHA"/>
+                        <outlet property="countLabel" destination="FIo-m0-TwV" id="UJa-EY-C2m"/>
+                        <outlet property="decrementButton" destination="JSS-31-fsp" id="d0h-3d-U8d"/>
+                        <outlet property="incrementButton" destination="CWm-tL-cuW" id="ZBP-8O-INk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
