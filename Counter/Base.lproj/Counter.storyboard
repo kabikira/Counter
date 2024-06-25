@@ -30,6 +30,9 @@
                                 <state key="normal" title="ー">
                                     <color key="titleColor" systemColor="opaqueSeparatorColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="tapDecrementButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jng-4x-wpv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWm-tL-cuW" userLabel="Increment Button">
                                 <rect key="frame" x="236" y="494" width="57" height="84"/>
