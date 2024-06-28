@@ -46,12 +46,12 @@ class CounterSpec: QuickSpec {
 
         describe("#isLowerLimit") {
             context("現在値が｢0｣") {
-                it("falseを返すこと") {
+                it("trueを返すこと") {
                     expect(Counter().isLowerLimit).to(beTrue())
                 }
             }
             context("現在値が｢1｣") {
-                it("trueを返すこと") {
+                it("falseを返すこと") {
                     expect(Counter(count: 1).isLowerLimit).to(beFalse())
                 }
             }
@@ -59,13 +59,41 @@ class CounterSpec: QuickSpec {
 
         describe("#isUpperLimit") {
             context("現在値が「9」") {
-                it("trueを返すこと") {
+                it("falseを返すこと") {
                     expect(Counter(count: 9).isUpperLimit).to(beFalse())
                 }
             }
             context("現在値が「10」") {
-                it("falseを返すこと") {
+                it("trueを返すこと") {
                     expect(Counter(count: 10).isUpperLimit).to(beTrue())
+                }
+            }
+        }
+
+        describe("永続化") {
+            context("現在値が｢2｣") {
+                var counter: Counter!
+                var counterStorageMock: CounterStorageMock!
+
+                beforeEach {
+                    // モックオブジェクトを生成し、CounterクラスにDIする
+                    counterStorageMock = CounterStorageMock()
+                    counter = Counter(count: 2, counterStorage: counterStorageMock)
+                }
+                context("#incrementを呼び出す") {
+                    it("CounterStorage.save()が引数「3」で呼び出されること") {
+                        counter.increment()
+
+                        // モックオブジェクトに記録されたメソッド呼び出し時の引数を検証
+                        expect(counterStorageMock.latestSaveCount).to(equal(3))
+                    }
+                }
+
+                context("#decrementを呼び出す") {
+                    it("CounterStorage.save()が引数「1」で呼び出されること") {
+                        counter.decrement()
+                        expect(counterStorageMock.latestSaveCount).to(equal(1))
+                    }
                 }
             }
         }
@@ -150,6 +178,33 @@ class CounterViewControllerSpec: QuickSpec {
                 it("下限値になるので「-」ボタンが非活性になること") {
                     vc.decrementButton.tap()
                     expect(vc.decrementButton.isEnabled).to(beFalse())
+                }
+            }
+        }
+
+        describe("現在値の保存") {
+            context("現在値が2") {
+                beforeEach {
+                    vc.incrementButton.tap(repeat: 2)
+                    UserDefaults.standard.set(0, forKey: "count")
+                }
+                context("「+」ボタンをタップ") {
+                    it("現在値「3」がUserDefaultsに保存されること") {
+                        vc.incrementButton.tap()
+
+                        // 3UserDefaultsのキー「count」から値を取得してアサーション
+                        let actual = UserDefaults.standard.integer(forKey: "count")
+                        expect(actual).to(equal(3))
+                    }
+                }
+                context("「-」ボタンをタップ") {
+                    it("現在値「1」がUserDefaultsに保存されること") {
+                        vc.decrementButton.tap()
+
+                        // 3UserDefaultsのキー「count」から値を取得してアサーション
+                        let actual = UserDefaults.standard.integer(forKey: "count")
+                        expect(actual).to(equal(1))
+                    }
                 }
             }
         }
